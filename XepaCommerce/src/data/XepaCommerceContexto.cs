@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 91a3f1e35d5a5511429a6489f1b74432e789d16d
 using Microsoft.EntityFrameworkCore;
 using XepaCommerce.src.modelos;
 
