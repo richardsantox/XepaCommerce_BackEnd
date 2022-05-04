@@ -15,6 +15,14 @@ namespace XepaCommerce
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        
+    
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -25,17 +33,20 @@ namespace XepaCommerce
                 .AddJsonFile("appsettings.json")
                 .Build();
 
+            #region Configuracao DB
             services.AddDbContext<XepaCommerceContexto>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+            #endregion
 
             //Configuração controlador            
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, XepaCommerceContexto contexto)
         {
             if (env.IsDevelopment())
             {
+                contexto.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
             }
 
