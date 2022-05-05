@@ -25,8 +25,6 @@ namespace XepaCommerce.src.modelos
 
             [Required]
             public string Endereco { get; set; }
-    
-            public string FormaDePagamento { get; set; }
 
             //[JsonIgnore]
             //public List<ProdutoModelo> RelatedPosts { get; set; }

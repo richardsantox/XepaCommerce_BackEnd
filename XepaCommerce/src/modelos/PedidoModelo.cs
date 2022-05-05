@@ -20,6 +20,9 @@ namespace XepaCommerce.src.modelos
         [Required, StringLength(50)]
         public string StatusPedido { get; set; }
 
+        [Required]
+        public string FormaDePagamento { get; set; }
+
         [ForeignKey("fk_usuario")]
         public UsuarioModelo Comprador { get; set; }
 
