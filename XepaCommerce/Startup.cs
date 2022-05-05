@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using XepaCommerce.src.data;
+using XepaCommerce.src.repositorios;
+using XepaCommerce.src.repositorios.implementacoes;
 
 namespace XepaCommerce
 {
@@ -39,6 +41,11 @@ namespace XepaCommerce
 
             //Configuração controlador            
             services.AddControllers();
+
+            //Repositorio
+            services.AddScoped<IUsuario, UsuarioRepositorio>();
+            services.AddScoped<IPedido, PedidoRepositorio>();
+            services.AddScoped<IProduto, ProdutoRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
