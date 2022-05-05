@@ -10,6 +10,6 @@ namespace XepaCommerce.src.repositorios
         void DeletarPedido(int id);
         PedidoModelo PegarPedidoPeloId(int id);
         List<PedidoModelo> PegarTodosPedidos();
-        List<PedidoModelo> PesquisarPedido(string produto, string comprador);
+        List<PedidoModelo> PesquisarPedido(string produto, string comprador, string email);
     }
 }
