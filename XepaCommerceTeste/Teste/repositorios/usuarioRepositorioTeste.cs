@@ -12,8 +12,8 @@ using XepaCommerce.src.repositorios.implementacoes;
 
 namespace XepaCommerceTeste.Teste.repositorios
 {
-    //[TestClass]
-    public class usuarioRepositorioTeste
+    [TestClass]
+    public class UsuarioRepositorioTeste
     {
         private XepaCommerceContexto _contexto;
         private IUsuario _repositorio;
