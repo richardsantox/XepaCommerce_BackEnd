@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using XepaCommerce.src.dtos;
 using XepaCommerce.src.modelos;
 
 namespace XepaCommerce.src.repositorios

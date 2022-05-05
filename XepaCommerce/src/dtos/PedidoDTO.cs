@@ -9,7 +9,7 @@ namespace XepaCommerce.src.dtos
     /// <para>Versão: 1.0</para>
     /// <para>Data: 05/05/2022 11:18</para>
     /// </summary>
-    public class NovoPedidosDTO
+    public class NovoPedidoDTO
     {
         [Required]
         public int Quantidade { get; set; }
@@ -29,7 +29,7 @@ namespace XepaCommerce.src.dtos
         [Required]
         public string ProdutoComprado { get; set; }
 
-        public NovoPedidosDTO(int quantidade, float precoTotal, string statusPedido, string formaDePagamento, string nomeComprador, string produtoComprado)
+        public NovoPedidoDTO(int quantidade, float precoTotal, string statusPedido, string formaDePagamento, string nomeComprador, string produtoComprado)
         {
             Quantidade = quantidade;
             PrecoTotal = precoTotal;
