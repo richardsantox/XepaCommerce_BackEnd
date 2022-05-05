@@ -11,7 +11,7 @@ using XepaCommerce.src.repositorios;
 using XepaCommerce.src.repositorios.implementacoes;
 
 namespace XepaCommerceTeste.Teste.repositorios
-{
+{   #region Testes
     [TestClass]
     public class UsuarioRepositorioTeste
     {
@@ -129,4 +129,6 @@ namespace XepaCommerceTeste.Teste.repositorios
             antigo.Id).Senha);
         }
     }
+    #endregion
 }
+
