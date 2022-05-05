@@ -12,7 +12,7 @@ using XepaCommerce.src.repositorios.implementacoes;
 
 namespace XepaCommerceTeste.Teste.repositorios
 {
-    [TestClass]
+    //[TestClass]
     public class ProdutoRepositorioTeste
     {
         private XepaCommerceContexto _contexto;

@@ -21,7 +21,7 @@ namespace XepaCommerceTeste.Teste.repositorios
         private IPedido _repositorioPe;
 
         [TestInitialize]
-        public void ConfiguracaoInicial() 
+        public void ConfiguracaoInicial()
         {
             var opt = new DbContextOptionsBuilder<XepaCommerceContexto>()
                     .UseInMemoryDatabase(databaseName: "db_xepacommerce")
@@ -33,18 +33,31 @@ namespace XepaCommerceTeste.Teste.repositorios
         }
 
         [TestMethod]
-        public void CriarTresPedidosNoSistemaERetornarTres() 
+        public void CriarTresPedidosNoSistemaERetornarTres()
         {
-            _repositorioPe.NovoPedido(
-            new NovoPedidoDTO(
-            5,
-            150.00f,
-            "Enviado", 
-            "Cartão",
-            "Thamires",
-            "Banana"
-            )
+            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Thamires", "thamires@email.com", "134652", "Rua augusta 200"));
+            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Ana Paula", "ana@email.com", "134652", "Rua augusta 200"));
+
+            _repositorioP.NovoProduto(
+                new NovoProdutoDTO(
+                    "Melancia",
+                    9.55f,
+                    "Melancia Fuji",
+                    "URLFOTO",
+                    200
+                )
             );
+
+            _repositorioP.NovoProduto(
+                new NovoProdutoDTO(
+                    "Laranja",
+                    1.78f,
+                    "Laranja pera",
+                    "URLFOTO",
+                    30
+                )
+            );
+
 
             _repositorioPe.NovoPedido(
             new NovoPedidoDTO(
@@ -63,13 +76,66 @@ namespace XepaCommerceTeste.Teste.repositorios
             100.00f,
             "Enviado",
             "Cartão",
-            "Richard",
+            "Thamires",
             "Laranja"
             )
             );
 
-            Assert.AreEqual(3,_repositorioPe.PegarTodosPedidos().Count());
-    
+            Assert.AreEqual(2, _repositorioPe.PegarTodosPedidos().Count());
+
+        }
+
+        [TestMethod]
+        public void PegarPedidoPorPesquisaRetornarCustomizada()
+        {
+
+            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Richard", "richard@email.com", "134652", "Rua Azul 200"));
+            _repositorioP.NovoProduto(
+                new NovoProdutoDTO(
+                    "Banana",
+                    1.78f,
+                    "Banana nanica",
+                    "URLFOTO",
+                    500
+                )
+            );
+
+            _repositorioPe.NovoPedido(
+            new NovoPedidoDTO(
+            5,
+            150.00f,
+            "Enviado",
+            "Cartão",
+            "Richard",
+            "Banana"
+            )
+            );
+
+            _repositorioPe.NovoPedido(
+            new NovoPedidoDTO(
+            5,
+            150.00f,
+            "Enviado",
+            "Cartão",
+            "Richard",
+            "Banana"
+            )
+            );
+
+            _repositorioPe.NovoPedido(
+            new NovoPedidoDTO(
+            5,
+            150.00f,
+            "Enviado",
+            "Cartão",
+            "Richard",
+            "Banana"
+            )
+            );
+
+            var pedidos = _repositorioPe
+            .PesquisarPedido("Banana", null, null);
+            Assert.AreEqual(3, pedidos.Count());
         }
     }
 }
