@@ -10,6 +10,6 @@ namespace XepaCommerce.src.repositorios
         void DeletarProduto(int id);
         ProdutoModelo PegarProdutoPeloId(int id);
         List<ProdutoModelo> PegarTodosProdutos();
-        List<ProdutoModelo> PegarProdutosPorPesquisa(string NomeProduto, string Descricao);        
+        List<ProdutoModelo> PegarProdutosPorPesquisa(string nomeProduto, string descricao);       
     }
 }
