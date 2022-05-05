@@ -40,8 +40,9 @@ namespace XepaCommerce.src.dtos
         [Required]
         public string Endereco { get; set; }
 
-        public AtualizarUsuarioDTO( string nome , string senha , string endereco )
+        public AtualizarUsuarioDTO(int id, string nome , string senha , string endereco )
         {
+            Id = id;
             Nome = nome;
             Senha = senha;
             Endereco = endereco;

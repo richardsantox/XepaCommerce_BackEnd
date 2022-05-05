@@ -28,6 +28,7 @@ namespace XepaCommerceTeste.Teste.repositorios
             _repositorio = new UsuarioRepositorio(_contexto);
         }
 
+
         [TestMethod]
         public void CriarQuatroUsuariosNoBancoRetornaQuatroUsuarios()
         {
@@ -62,5 +63,70 @@ namespace XepaCommerceTeste.Teste.repositorios
             Assert.AreEqual(4, _contexto.Usuarios.Count());
         }
 
+
+        [TestMethod]
+        public void PegarUsuarioPeloEmailRetornaNaoNulo()
+        {
+            
+            _repositorio.NovoUsuario(
+                new NovoUsuarioDTO(
+                    "Souza",
+                    "souza@email.com",
+                    "134652",
+                    "Rua França, 214, SP"));
+
+            var user = _repositorio.PegarUsuarioPeloEmail("souza@email.com");
+
+            Assert.IsNotNull(user);
+        }
+
+
+        [TestMethod]
+        public void PegarUsuarioPeloIdRetornaNaoNuloENomeDoUsuario()
+        {
+ 
+            _repositorio.NovoUsuario(
+                new NovoUsuarioDTO(
+                    "Lucas Reluz",
+                    "lucas@email.com",
+                    "134652",
+                    "Rua Alemanha, 214, SP"));
+
+            var user = _repositorio.PegarUsuarioPeloId(6);
+
+            Assert.IsNotNull(user);
+            Assert.AreEqual("Lucas Reluz", user.Nome);
+        }
+
+
+        [TestMethod]
+        public void AtualizarUsuarioRetornaUsuarioAtualizado()
+        {
+            _repositorio.NovoUsuario(
+            new NovoUsuarioDTO(
+            "Ana Paula",
+            "paula@email.com",
+            "134652",
+            "Rua Paraguay, 214, SP"));
+
+            var antigo =
+            _repositorio.PegarUsuarioPeloEmail("estefania@email.com");
+            _repositorio.AtualizarUsuario(
+            new AtualizarUsuarioDTO(
+            7,
+            "Ana Julia",
+            "123456",
+            "Rua Paraguay, 951, SP"
+            ));
+
+            Assert.AreEqual(
+            "Ana Julia",
+            _contexto.Usuarios.FirstOrDefault(u => u.Id == antigo.Id).Nome);
+
+            Assert.AreEqual(
+            "123456",
+            _contexto.Usuarios.FirstOrDefault(u => u.Id ==
+            antigo.Id).Senha);
+        }
     }
 }
