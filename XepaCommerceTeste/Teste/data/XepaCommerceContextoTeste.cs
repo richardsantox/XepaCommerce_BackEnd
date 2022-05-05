@@ -35,8 +35,7 @@ namespace XepaCommerceTeste.Teste.data
             usuario.Email = "richard@email.com";
             usuario.Senha = "123456";
             usuario.Endereco = "Rua Abreu, 55";
-            usuario.FormaDePagamento = "Cartão";
-
+            
             _contexto.Usuarios.Add(usuario);
 
             _contexto.SaveChanges();
