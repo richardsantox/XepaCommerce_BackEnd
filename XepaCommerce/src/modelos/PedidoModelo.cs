@@ -2,10 +2,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace XepaCommerce.src.modelos
-{
+{ 
+    [Table("tb_pedidos")]
     public class PedidoModelo
     {
-
+       
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

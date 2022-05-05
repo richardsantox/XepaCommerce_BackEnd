@@ -28,5 +28,8 @@ namespace XepaCommerce.src.modelos
     
             public string FormaDePagamento { get; set; }
 
+            //[JsonIgnore]
+            //public List<ProdutoModelo> RelatedPosts { get; set; }
+
     }
 }

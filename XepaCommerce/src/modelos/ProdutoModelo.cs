@@ -5,6 +5,8 @@ using System.Text.Json.Serialization;
 
 namespace XepaCommerce.src.modelos
 {
+    [Table("tb_produtos")]
+
     public class ProdutoModelo
     {
         [Key]
