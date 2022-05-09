@@ -1,6 +1,6 @@
 ﻿namespace XepaCommerce.src.Controladores
 {
-    public class PostagemControlador
+    public class ProdutoControlador
     {
     }
 }
