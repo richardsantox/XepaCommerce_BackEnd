@@ -46,7 +46,13 @@ namespace XepaCommerce
             services.AddScoped<IUsuario, UsuarioRepositorio>();
             services.AddScoped<IPedido, PedidoRepositorio>();
             services.AddScoped<IProduto, ProdutoRepositorio>();
+
+            //Controladores
+            services.AddCors();
+            services.AddControllers();
+
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, XepaCommerceContexto contexto)
