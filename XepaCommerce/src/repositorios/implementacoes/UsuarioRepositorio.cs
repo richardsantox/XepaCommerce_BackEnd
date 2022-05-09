@@ -51,6 +51,7 @@ namespace XepaCommerce.src.repositorios.implementacoes
                 Nome = usuario.Nome,
                 Email = usuario.Email,
                 Senha = usuario.Senha,
+                Endereco = usuario.Endereco
             });
             _contexto.SaveChanges();
         }

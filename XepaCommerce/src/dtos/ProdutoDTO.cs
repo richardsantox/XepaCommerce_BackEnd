@@ -43,7 +43,8 @@ namespace XepaCommerce.src.dtos
     /// </summary>
     public class AtualizarProdutoDTO
     {
-        internal int Id;
+        [Required]
+        public int Id { get; set; }
 
         [Required, StringLength(100)]
         public string NomeProduto { get; set; }
@@ -60,8 +61,9 @@ namespace XepaCommerce.src.dtos
         [Required]
         public int Estoque { get; set; }
 
-        public AtualizarProdutoDTO(string nomeproduto, float preco, string descricao, string foto, int estoque)
+        public AtualizarProdutoDTO(int id, string nomeproduto, float preco, string descricao, string foto, int estoque)
         {
+            Id = id;
             NomeProduto = nomeproduto;
             Preco = preco;
             Descricao = descricao;
