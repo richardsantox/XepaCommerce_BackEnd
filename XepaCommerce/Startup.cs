@@ -63,14 +63,17 @@ namespace XepaCommerce
                 app.UseDeveloperExceptionPage();
             }
 
+            //ambiente de Produção Rotas
             app.UseRouting();
+            app.UseCors(c => c
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+            );
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }
