@@ -22,7 +22,7 @@ namespace XepaCommerce.src.repositorios.implementacoes
         #endregion
 
         #region Metodos
-        public void AtualizarProdutoDTO(AtualizarProdutoDTO produto)
+        public void AtualizarProduto(AtualizarProdutoDTO produto)
         {
             var _produto = PegarProdutoPeloId(produto.Id);
             _produto.NomeProduto = produto.NomeProduto;
