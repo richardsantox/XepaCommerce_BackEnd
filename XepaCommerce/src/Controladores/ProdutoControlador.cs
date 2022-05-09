@@ -4,14 +4,11 @@ using XepaCommerce.src.repositorios;
 
 namespace XepaCommerce.src.Controladores
 {
-<<<<<<< HEAD
-    public class ProdutoControlador
-=======
     [ApiController]
     [Route("api/Produtos")]
     [Produces("application/json")]
+
     public class ProdutoControlador : ControllerBase
->>>>>>> 9d68fa7659c6a673e69f94629b0e05a17805fc07
     {
         #region Atributos
 
