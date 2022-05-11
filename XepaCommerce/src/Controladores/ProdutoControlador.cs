@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.repositorios;
 
@@ -29,9 +30,9 @@ namespace XepaCommerce.src.Controladores
 
         [HttpGet("id/{idproduto}")]
         [Authorize(Roles = "ADMINISTRADOR")]
-        public IActionResult PegarProdutoPeloId([FromRoute] int idproduto) 
+        public async Task<ActionResult> PegarProdutoPeloIdAsync([FromRoute] int idproduto) 
         {
-            var Produto = _repositorio.PegarProdutoPeloId(idproduto);
+            var Produto = await _repositorio.PegarProdutoPeloIdAsync(idproduto);
 
             if (Produto == null) return NotFound();
             return Ok(Produto);
@@ -39,9 +40,9 @@ namespace XepaCommerce.src.Controladores
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult PegarProdutoPorNome([FromQuery] string nomeproduto) 
+        public async Task<ActionResult> PegarProdutosPorNomeAsync([FromQuery] string nomeproduto) 
         {
-            var Produto = _repositorio.PegarProdutosPorNome(nomeproduto);
+            var Produto = await _repositorio.PegarProdutosPorNomeAsync(nomeproduto);
 
             if (Produto.Count < 1) return NoContent();
             return Ok(Produto);
@@ -59,27 +60,31 @@ namespace XepaCommerce.src.Controladores
 
         [HttpDelete("deletar/{idproduto}")]
         [Authorize(Roles = "ADMINISTRADOR")]
-        public IActionResult DeletarProduto([FromRoute] int idproduto)
+        public async Task<ActionResult> DeletarProdutoAsync([FromRoute] int idproduto)
         {
-            _repositorio.DeletarProduto(idproduto);
+            await _repositorio.DeletarProdutoAsync(idproduto);
             return NoContent();
         }
 
         [HttpPost]
         [Authorize(Roles = "ADMINISTRADOR")]
-        public IActionResult NovoProduto([FromBody] NovoProdutoDTO produto)
+        public async Task<ActionResult> NovoProdutoAsync([FromBody] NovoProdutoDTO produto)
         {
             if (!ModelState.IsValid) return BadRequest();
-            _repositorio.NovoProduto(produto);
+            
+            await _repositorio.NovoProdutoAsync(produto);
+            
             return Created("api/Produtos", produto);
         }
 
         [HttpPut]
         [Authorize(Roles = "ADMINISTRADOR")]
-        public IActionResult AtualizarProduto([FromBody] AtualizarProdutoDTO produto)
+        public async Task<ActionResult> AtualizarProdutoAsync([FromBody] AtualizarProdutoDTO produto)
         {
             if (!ModelState.IsValid) return BadRequest();
-            _repositorio.AtualizarProduto(produto);
+            
+            await _repositorio.AtualizarProdutoAsync(produto);
+            
             return Ok(produto);
         }
 

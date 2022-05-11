@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.modelos;
 
@@ -6,11 +7,11 @@ namespace XepaCommerce.src.repositorios
 {
     public interface IProduto
     {
-        void NovoProduto(NovoProdutoDTO produto);
-        void AtualizarProduto(AtualizarProdutoDTO produto);
-        void DeletarProduto(int id);
-        ProdutoModelo PegarProdutoPeloId(int id);
+        Task NovoProdutoAsync(NovoProdutoDTO produto);
+        Task AtualizarProdutoAsync(AtualizarProdutoDTO produto);
+        Task DeletarProdutoAsync(int id);
+        Task<ProdutoModelo> PegarProdutoPeloIdAsync(int id);
         List<ProdutoModelo> PegarTodosProdutos();
-        List<ProdutoModelo> PegarProdutosPorNome(string nomeProduto);       
+        Task<List<ProdutoModelo>> PegarProdutosPorNomeAsync(string nomeProduto);       
     }
 }
