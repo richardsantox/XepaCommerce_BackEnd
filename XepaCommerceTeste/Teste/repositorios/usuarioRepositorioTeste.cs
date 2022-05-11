@@ -11,7 +11,8 @@ using XepaCommerce.src.repositorios;
 using XepaCommerce.src.repositorios.implementacoes;
 
 namespace XepaCommerceTeste.Teste.repositorios
-{   #region Testes
+{   
+    #region Testes
     [TestClass]
     public class UsuarioRepositorioTeste
     {

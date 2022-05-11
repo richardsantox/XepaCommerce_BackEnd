@@ -5,42 +5,39 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using XepaCommerce.src.data;
 using XepaCommerce.src.repositorios;
 using XepaCommerce.src.repositorios.implementacoes;
+using XepaCommerce.src.servicos;
+using XepaCommerce.src.servicos.implementacoes;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using XepaCommerce.src.data;
+using Microsoft.EntityFrameworkCore;
 
 namespace XepaCommerce
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
-        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+        public IConfiguration Configuration { get; }
+        
+        
         
     
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //Contexto
-            IConfigurationRoot config = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json")
-                .Build();
-
             #region Configuracao DB
-            services.AddDbContext<XepaCommerceContexto>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<XepaCommerceContexto>(opt => opt.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             #endregion
-
-            //Configura��o controlador            
-            services.AddControllers();
 
             //Repositorio
             services.AddScoped<IUsuario, UsuarioRepositorio>();
@@ -51,6 +48,27 @@ namespace XepaCommerce
             services.AddCors();
             services.AddControllers();
 
+             // Configuração de Serviços
+            services.AddScoped<IAutenticacao, AutenticacaoServicos>();
+            // Configuração do Token Autenticação JWTBearer
+            var chave = Encoding.ASCII.GetBytes(Configuration["Settings:Secret"]);
+            services.AddAuthentication(a =>
+            {
+                a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(b =>
+            {
+                b.RequireHttpsMetadata = false;
+                b.SaveToken = true;
+                b.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(chave),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            }
+            );
         }
 
 
@@ -63,13 +81,17 @@ namespace XepaCommerce
                 app.UseDeveloperExceptionPage();
             }
 
-            //ambiente de Produ��o Rotas
+            //ambiente de Produ��o Rotas
             app.UseRouting();
             app.UseCors(c => c
                         .AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
             );
+
+             // Autenticação e Autorização
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
