@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using XepaCommerce.src.data;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.modelos;
@@ -24,15 +25,15 @@ namespace XepaCommerce.src.repositorios.implementacoes
 
         #region Metodos
 
-        public void DeletarPedido(int id)
+        public async Task DeletarPedidoAsync(int id)
         {
-            _contexto.Pedidos.Remove(PegarPedidoPeloId(id));
-            _contexto.SaveChanges();
+            _contexto.Pedidos.Remove(await PegarPedidoPeloIdAsync(id));
+            await _contexto.SaveChangesAsync();
         }
 
-        public void NovoPedido(NovoPedidoDTO pedido)
+        public async Task NovoPedidoAsync(NovoPedidoDTO pedido)
         {
-            _contexto.Pedidos.Add(new PedidoModelo
+            await _contexto.Pedidos.AddAsync(new PedidoModelo
             {
                 Quantidade = pedido.Quantidade,
                 PrecoTotal = pedido.PrecoTotal,
@@ -45,80 +46,89 @@ namespace XepaCommerce.src.repositorios.implementacoes
 
         }
 
-        public PedidoModelo PegarPedidoPeloId(int id)
+        public async Task<PedidoModelo> PegarPedidoPeloIdAsync(int id)
         {
-            return _contexto.Pedidos.FirstOrDefault(pe => pe.Id == id);
+            return await _contexto.Pedidos
+                 .Include(p => p.Comprador)
+                 .Include(p => p.Produto)
+                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public List<PedidoModelo> PegarTodosPedidos()
+        public async Task<List<PedidoModelo>> PegarTodosPedidosAsync()
         {
-            return _contexto.Pedidos.ToList();
+            return await _contexto.Pedidos
+               .Include(p => p.Comprador)
+               .Include(p => p.Produto)
+               .ToListAsync();
         }
 
-        public List<PedidoModelo> PesquisarPedido(string produto, string comprador, string email)
+        public async Task<List<PedidoModelo>> PesquisarPedidoAsync(
+            string produto, 
+            string comprador,
+            string email)
         {
             switch (produto, comprador, email)
             {
                 case (null, null, null):
-                    return PegarTodosPedidos();
+                    return await PegarTodosPedidosAsync();
 
                 case (null, null, _):
-                    return _contexto.Pedidos
+                    return await _contexto.Pedidos
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
                         .Where(pe => pe.Comprador.Email.Contains(comprador))
-                        .ToList();
+                        .ToListAsync();
 
                 case (null, _, null):
-                    return _contexto.Pedidos
+                    return await _contexto.Pedidos
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
                         .Where(pe => pe.Comprador.Nome.Contains(comprador))
-                        .ToList();
+                         .ToListAsync();
 
                 case (_, null, null):
-                    return _contexto.Pedidos
+                    return await _contexto.Pedidos
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
                         .Where(pe => pe.Produto.NomeProduto.Contains(produto))
-                        .ToList();
+                         .ToListAsync();
 
                 case (_, _, null):
-                    return _contexto.Pedidos
+                    return await _contexto.Pedidos
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
                         .Where(pe =>
                         pe.Produto.NomeProduto.Contains(produto) &
                         pe.Comprador.Nome.Contains(comprador))
-                        .ToList();
+                         .ToListAsync();
 
                 case (null, _, _):
-                    return _contexto.Pedidos
+                    return await _contexto.Pedidos
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
                         .Where(pe =>
                         pe.Comprador.Nome.Contains(comprador) &
                         pe.Comprador.Email.Contains(email))
-                        .ToList();
+                       .ToListAsync();
 
                 case (_, null, _):
-                    return _contexto.Pedidos
+                    return await _contexto.Pedidos
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
                         .Where(pe =>
                         pe.Produto.NomeProduto.Contains(produto) &
                         pe.Comprador.Email.Contains(email))
-                        .ToList();
+                        .ToListAsync();
 
                 case (_, _, _):
-                    return _contexto.Pedidos
+                    return await _contexto.Pedidos
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
                         .Where(pe =>
                         pe.Produto.NomeProduto.Contains(produto) |
                         pe.Comprador.Nome.Contains(comprador) |
                         pe.Comprador.Email.Contains(email))
-                        .ToList();
+                        .ToListAsync();
             }
 
 

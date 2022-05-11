@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.repositorios;
 
@@ -28,10 +29,9 @@ namespace XepaCommerce.src.Controladores
 
         [HttpGet("id/{idPedido}")]
         [Authorize(Roles = "ADMINISTRADOR")]
-        public IActionResult PegarPedidoPeloId([FromRoute] int idPedido)
+        public async Task<ActionResult> PegarPedidoPeloIdAsync([FromRoute] int idPedido)
         {
-            
-            var pedido = _repositorio.PegarPedidoPeloId(idPedido);
+            var pedido = await _repositorio.PegarPedidoPeloIdAsync(idPedido);
 
             if (pedido == null) return NotFound();
 
@@ -40,9 +40,9 @@ namespace XepaCommerce.src.Controladores
 
         [HttpGet]
         [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
-        public IActionResult PegarTodosPedidos()
+        public async Task<ActionResult> PegarTodosPedidos()
         {
-            var lista = _repositorio.PegarTodosPedidos();
+            var lista = await _repositorio.PegarTodosPedidosAsync();
 
             if (lista.Count < 1) return NoContent();
 
@@ -51,7 +51,7 @@ namespace XepaCommerce.src.Controladores
 
         [HttpGet("pesquisa")]
         [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
-        public IActionResult PesquisarPedido
+        public async Task<ActionResult> PesquisarPedidoAsync
         (
             [FromQuery] string produto,
             [FromQuery] string comprador,
@@ -59,7 +59,7 @@ namespace XepaCommerce.src.Controladores
         )
 
         {
-              var pedido = _repositorio.PesquisarPedido(produto, comprador, email);
+              var pedido = await _repositorio.PesquisarPedidoAsync(produto, comprador, email);
 
               if (pedido.Count < 1) return NoContent();
 
@@ -69,20 +69,20 @@ namespace XepaCommerce.src.Controladores
 
         [HttpPost]
         [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
-        public IActionResult NovaPedido([FromBody] NovoPedidoDTO pedido)
+        public async Task<ActionResult> NovaPedidoAsync([FromBody] NovoPedidoDTO pedido)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            _repositorio.NovoPedido(pedido);
+            await _repositorio.NovoPedidoAsync(pedido);
 
             return Created($"api/Postagens", pedido);
         }
 
         [HttpDelete("deletar/{idPedido}")]
         [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
-        public IActionResult DeletarPedido([FromRoute] int idPedido)
+        public async Task<ActionResult> DeletarPedidoAsync([FromRoute] int idPedido)
         {
-            _repositorio.DeletarPedido(idPedido);
+            await _repositorio.DeletarPedidoAsync(idPedido);
             return NoContent();
         }
         #endregion
