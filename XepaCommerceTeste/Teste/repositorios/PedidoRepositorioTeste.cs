@@ -9,10 +9,11 @@ using XepaCommerce.src.data;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.repositorios;
 using XepaCommerce.src.repositorios.implementacoes;
+using XepaCommerce.src.utilidades;
 
 namespace XepaCommerceTeste.Teste.repositorios
 {
-    //[TestClass]
+    [TestClass]
     public class PedidoRepositorioTeste
     {
         private XepaCommerceContexto _contexto;
@@ -35,8 +36,8 @@ namespace XepaCommerceTeste.Teste.repositorios
         [TestMethod]
         public void CriarTresPedidosNoSistemaERetornarTres()
         {
-            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Thamires", "thamires@email.com", "134652", "Rua augusta 200"));
-            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Ana Paula", "ana@email.com", "134652", "Rua augusta 200"));
+            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Thamires", "thamires@email.com", "134652", "Rua augusta 200", TipoUsuario.NORMAL));
+            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Ana Paula", "ana@email.com", "134652", "Rua augusta 200", TipoUsuario.NORMAL));
 
             _repositorioP.NovoProduto(
                 new NovoProdutoDTO(
@@ -60,25 +61,25 @@ namespace XepaCommerceTeste.Teste.repositorios
 
 
             _repositorioPe.NovoPedido(
-            new NovoPedidoDTO(
-            6,
-            200.00f,
-            "Enviado",
-            "Pix",
-            "Ana Paula",
-            "Melancia"
-            )
+                new NovoPedidoDTO(
+                    6,
+                    200.00f,
+                    "Enviado",
+                    "Pix",
+                    "Ana Paula",
+                    "Melancia"
+                )
             );
 
             _repositorioPe.NovoPedido(
             new NovoPedidoDTO(
-            7,
-            100.00f,
-            "Enviado",
-            "Cartão",
-            "Thamires",
-            "Laranja"
-            )
+                    7,
+                    100.00f,
+                    "Enviado",
+                    "Cartão",
+                    "Thamires",
+                    "Laranja"
+                )
             );
 
             Assert.AreEqual(2, _repositorioPe.PegarTodosPedidos().Count());
@@ -89,7 +90,7 @@ namespace XepaCommerceTeste.Teste.repositorios
         public void PegarPedidoPorPesquisaRetornarCustomizada()
         {
 
-            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Richard", "richard@email.com", "134652", "Rua Azul 200"));
+            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Richard", "richard@email.com", "134652", "Rua Azul 200", TipoUsuario.NORMAL));
             _repositorioP.NovoProduto(
                 new NovoProdutoDTO(
                     "Banana",
@@ -101,36 +102,36 @@ namespace XepaCommerceTeste.Teste.repositorios
             );
 
             _repositorioPe.NovoPedido(
-            new NovoPedidoDTO(
-            5,
-            150.00f,
-            "Enviado",
-            "Cartão",
-            "Richard",
-            "Banana"
-            )
+                new NovoPedidoDTO(
+                    5,
+                    150.00f,
+                    "Enviado",
+                    "Cartão",
+                    "Richard",
+                    "Banana"
+                )
             );
 
             _repositorioPe.NovoPedido(
-            new NovoPedidoDTO(
-            5,
-            150.00f,
-            "Enviado",
-            "Cartão",
-            "Richard",
-            "Banana"
-            )
+                new NovoPedidoDTO(
+                    5,
+                    150.00f,
+                    "Enviado",
+                    "Cartão",
+                    "Richard",
+                    "Banana"
+                )
             );
 
             _repositorioPe.NovoPedido(
-            new NovoPedidoDTO(
-            5,
-            150.00f,
-            "Enviado",
-            "Cartão",
-            "Richard",
-            "Banana"
-            )
+                new NovoPedidoDTO(
+                    5,
+                    150.00f,
+                    "Enviado",
+                    "Cartão",
+                    "Richard",
+                    "Banana"
+                )
             );
 
             var pedidos = _repositorioPe
