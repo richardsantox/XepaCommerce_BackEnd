@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.repositorios;
 
@@ -26,7 +27,7 @@ namespace XepaCommerce.src.Controladores
         #region Metodos 
 
         [HttpGet("id/{idPedido}")]
-
+        [Authorize(Roles = "ADMINISTRADOR")]
         public IActionResult PegarPedidoPeloId([FromRoute] int idPedido)
         {
             
@@ -38,7 +39,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpGet]
-
+        [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
         public IActionResult PegarTodosPedidos()
         {
             var lista = _repositorio.PegarTodosPedidos();
@@ -49,6 +50,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpGet("pesquisa")]
+        [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
         public IActionResult PesquisarPedido
         (
             [FromQuery] string produto,
@@ -66,6 +68,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpPost]
+        [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
         public IActionResult NovaPedido([FromBody] NovoPedidoDTO pedido)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -76,6 +79,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpDelete("deletar/{idPedido}")]
+        [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
         public IActionResult DeletarPedido([FromRoute] int idPedido)
         {
             _repositorio.DeletarPedido(idPedido);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.repositorios;
 
@@ -27,6 +28,7 @@ namespace XepaCommerce.src.Controladores
         #region Métodos
 
         [HttpGet("id/{idproduto}")]
+        [Authorize(Roles = "ADMINISTRADOR")]
         public IActionResult PegarProdutoPeloId([FromRoute] int idproduto) 
         {
             var Produto = _repositorio.PegarProdutoPeloId(idproduto);
@@ -36,6 +38,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult PegarProdutoPorNome([FromQuery] string nomeproduto) 
         {
             var Produto = _repositorio.PegarProdutosPorNome(nomeproduto);
@@ -45,6 +48,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult PegarTodosProdutos()
         {
             var lista = _repositorio.PegarTodosProdutos();
@@ -54,6 +58,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpDelete("deletar/{idproduto}")]
+        [Authorize(Roles = "ADMINISTRADOR")]
         public IActionResult DeletarProduto([FromRoute] int idproduto)
         {
             _repositorio.DeletarProduto(idproduto);
@@ -61,6 +66,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpPost]
+        [Authorize(Roles = "ADMINISTRADOR")]
         public IActionResult NovoProduto([FromBody] NovoProdutoDTO produto)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -69,6 +75,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpPut]
+        [Authorize(Roles = "ADMINISTRADOR")]
         public IActionResult AtualizarProduto([FromBody] AtualizarProdutoDTO produto)
         {
             if (!ModelState.IsValid) return BadRequest();
