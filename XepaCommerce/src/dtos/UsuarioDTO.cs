@@ -15,14 +15,17 @@ namespace XepaCommerce.src.dtos
 
         [Required]
         public string Endereco { get; set; }
-    
+
+        [Required]
+        public TipoUsuario Tipo { get; set }
         
-        public NovoUsuarioDTO(string nome ,string email , string senha , string endereco )
+        public NovoUsuarioDTO(string nome ,string email , string senha , string endereco, TipoUsuario tipo)
         {
             Nome = nome;
             Email = email;
             Senha = senha;
             Endereco = endereco;
+            Tipo = tipo;
         }
     }
 

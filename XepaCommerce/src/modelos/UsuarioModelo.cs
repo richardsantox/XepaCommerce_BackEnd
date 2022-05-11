@@ -26,6 +26,9 @@ namespace XepaCommerce.src.modelos
             [Required]
             public string Endereco { get; set; }
 
-           
+            [Required]
+            public TipoUsuario Tipo { get; set; }
+
+
     }
 }
