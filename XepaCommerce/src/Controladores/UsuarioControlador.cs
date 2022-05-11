@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.repositorios;
 
@@ -29,6 +30,7 @@ namespace XepaCommerce.src.Controladores
         #region Métodos
 
         [HttpGet("id/{idUsuario}")]
+        [Authorize(Roles = "ADMINISTRADOR")]
         public IActionResult PegarUsuarioPeloId([FromRoute] int idUsuario)
         {
             var usuario = _repositorio.PegarUsuarioPeloId(idUsuario);
@@ -39,6 +41,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpGet]
+        [Authorize(Roles = "ADMINISTRADOR")]
         public IActionResult PegarUsuariosPeloNome([FromQuery] string nomeUsuario)
         {
             var usuarios = _repositorio.PegarUsuariosPeloNome(nomeUsuario);
@@ -49,6 +52,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpGet("email/{emailUsuario}")]
+        [Authorize(Roles = "ADMINISTRADOR")]
         public IActionResult PegarUsuarioPeloEmail([FromRoute] string emailUsuario)
         {
             var usuario = _repositorio.PegarUsuarioPeloEmail(emailUsuario);
@@ -59,6 +63,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult NovoUsuario([FromBody] NovoUsuarioDTO usuario)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -68,6 +73,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpPut]
+        [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
         public IActionResult AtualizarUsuario([FromBody] AtualizarUsuarioDTO usuario)
         {
             if (!ModelState.IsValid) return BadRequest();

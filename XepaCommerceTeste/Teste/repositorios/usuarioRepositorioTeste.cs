@@ -9,6 +9,7 @@ using XepaCommerce.src.data;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.repositorios;
 using XepaCommerce.src.repositorios.implementacoes;
+using XepaCommerce.src.utilidades;
 
 namespace XepaCommerceTeste.Teste.repositorios
 {   
@@ -38,28 +39,32 @@ namespace XepaCommerceTeste.Teste.repositorios
                     "Richard",
                     "richard@email.com",
                     "134652",
-                    "Rua da flores, 55, SP"));
+                    "Rua da flores, 55, SP",
+                    TipoUsuario.NORMAL));
 
             _repositorio.NovoUsuario(
                new NovoUsuarioDTO(
                    "Ana Paula",
                    "ana@email.com",
                    "134652",
-                   "Rua dos laranjais, 302, SP"));
+                   "Rua dos laranjais, 302, SP",
+                   TipoUsuario.NORMAL));
 
             _repositorio.NovoUsuario(
                new NovoUsuarioDTO(
                    "Matheus Correira",
                    "matheus@email.com",
                    "134652",
-                   "Rua das americas, 963, SP"));
+                   "Rua das americas, 963, SP",
+                   TipoUsuario.NORMAL));
 
             _repositorio.NovoUsuario(
                new NovoUsuarioDTO(
                    "Thamires Aparecida",
                    "thamires@email.com",
                    "134652",
-                   "Rua Brasil, 214, SP"));
+                   "Rua Brasil, 214, SP",
+                   TipoUsuario.NORMAL));
 
             Assert.AreEqual(4, _contexto.Usuarios.Count());
         }
@@ -74,7 +79,8 @@ namespace XepaCommerceTeste.Teste.repositorios
                     "Souza",
                     "souza@email.com",
                     "134652",
-                    "Rua França, 214, SP"));
+                    "Rua França, 214, SP",
+                    TipoUsuario.NORMAL));
 
             var user = _repositorio.PegarUsuarioPeloEmail("souza@email.com");
 
@@ -91,7 +97,8 @@ namespace XepaCommerceTeste.Teste.repositorios
                     "Lucas Reluz",
                     "lucas@email.com",
                     "134652",
-                    "Rua Alemanha, 214, SP"));
+                    "Rua Alemanha, 214, SP",
+                    TipoUsuario.NORMAL));
 
             var user = _repositorio.PegarUsuarioPeloId(6);
 
@@ -108,7 +115,8 @@ namespace XepaCommerceTeste.Teste.repositorios
             "Ana Paula",
             "paula@email.com",
             "134652",
-            "Rua Paraguay, 214, SP"));
+            "Rua Paraguay, 214, SP",
+            TipoUsuario.NORMAL));
 
             var antigo =
             _repositorio.PegarUsuarioPeloEmail("estefania@email.com");
