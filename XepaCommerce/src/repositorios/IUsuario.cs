@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.modelos;
 
@@ -12,11 +13,11 @@ namespace XepaCommerce.src.repositorios
     /// </summary>
     public interface IUsuario
     {
-        UsuarioModelo PegarUsuarioPeloId(int id);
-        List<UsuarioModelo> PegarUsuariosPeloNome(string nome);
-        UsuarioModelo PegarUsuarioPeloEmail(string email);
-        void NovoUsuario(NovoUsuarioDTO usuario);
-        void AtualizarUsuario(AtualizarUsuarioDTO usuario);
-        void DeletarUsuario(int id);
+        Task <UsuarioModelo> PegarUsuarioPeloIdAsync(int id);
+        Task<List<UsuarioModelo>> PegarUsuariosPeloNomeAsync(string nome);
+        Task<UsuarioModelo> PegarUsuarioPeloEmailAsync(string email);
+        Task NovoUsuarioAsync(NovoUsuarioDTO usuario);
+        Task AtualizarUsuarioAsync(AtualizarUsuarioDTO usuario);
+        Task DeletarUsuarioAsync(int id);
     }
 }
