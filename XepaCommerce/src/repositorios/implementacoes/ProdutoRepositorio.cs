@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using XepaCommerce.src.data;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.modelos;
@@ -22,25 +24,25 @@ namespace XepaCommerce.src.repositorios.implementacoes
         #endregion
 
         #region Metodos
-        public void AtualizarProduto(AtualizarProdutoDTO produto)
+        public async Task AtualizarProdutoAsync(AtualizarProdutoDTO produto)
         {
-            var _produto = PegarProdutoPeloId(produto.Id);
+            var _produto = await PegarProdutoPeloIdAsync(produto.Id);
             _produto.NomeProduto = produto.NomeProduto;
             _produto.Preco = produto.Preco;
             _produto.Descricao = produto.Descricao;
             _produto.Foto = produto.Foto;
             _produto.Estoque = produto.Estoque;
             _contexto.Update(_produto);
-            _contexto.SaveChanges();
+            await _contexto.SaveChangesAsync();
         }
 
-        public void DeletarProduto(int id)
+        public async Task DeletarProdutoAsync(int id)
         {
-            _contexto.Produtos.Remove(PegarProdutoPeloId(id));
-            _contexto.SaveChanges();
+            _contexto.Produtos.Remove(await PegarProdutoPeloIdAsync(id));
+            await _contexto.SaveChangesAsync();
         }
 
-        public void NovoProduto(NovoProdutoDTO produto)
+        public async Task NovoProdutoAsync(NovoProdutoDTO produto)
         {
             _contexto.Produtos.Add(new ProdutoModelo
             {
@@ -50,17 +52,17 @@ namespace XepaCommerce.src.repositorios.implementacoes
             Foto = produto.Foto,
             Estoque = produto.Estoque
         });
-            _contexto.SaveChanges();
+            await _contexto.SaveChangesAsync();
         }
 
-        public ProdutoModelo PegarProdutoPeloId(int id)
+        public async Task<ProdutoModelo> PegarProdutoPeloIdAsync(int id)
         {
-            return _contexto.Produtos.FirstOrDefault(p => p.Id == id);
+            return await _contexto.Produtos.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public List<ProdutoModelo> PegarProdutosPorNome(string nomeProduto)
+        public async Task<List<ProdutoModelo>> PegarProdutosPorNomeAsync(string nomeProduto)
         {
-            return _contexto.Produtos.Where(u => u.NomeProduto.Contains(nomeProduto)).ToList();
+            return await _contexto.Produtos.Where(u => u.NomeProduto.Contains(nomeProduto)).ToListAsync();
         }
 
         public List<ProdutoModelo> PegarTodosProdutos()
