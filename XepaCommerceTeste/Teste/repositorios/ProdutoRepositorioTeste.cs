@@ -12,7 +12,7 @@ using XepaCommerce.src.repositorios.implementacoes;
 
 namespace XepaCommerceTeste.Teste.repositorios
 {
-    //[TestClass]
+    [TestClass]
     public class ProdutoRepositorioTeste
     {
         private XepaCommerceContexto _contexto;
@@ -75,7 +75,6 @@ namespace XepaCommerceTeste.Teste.repositorios
             //THEN - Entao deve retornar 1 tema)
             Assert.AreEqual("Banana", produto.NomeProduto);
         }
-
     }
 }
 
