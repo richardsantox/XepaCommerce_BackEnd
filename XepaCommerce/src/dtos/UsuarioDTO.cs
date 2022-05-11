@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using XepaCommerce.src.utilidades;
 
 namespace XepaCommerce.src.dtos
 {
@@ -17,7 +18,7 @@ namespace XepaCommerce.src.dtos
         public string Endereco { get; set; }
 
         [Required]
-        public TipoUsuario Tipo { get; set }
+        public TipoUsuario Tipo { get; set; }
         
         public NovoUsuarioDTO(string nome ,string email , string senha , string endereco, TipoUsuario tipo)
         {
