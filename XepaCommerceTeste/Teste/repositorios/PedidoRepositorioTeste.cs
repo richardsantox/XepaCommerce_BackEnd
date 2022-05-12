@@ -34,12 +34,12 @@ namespace XepaCommerceTeste.Teste.repositorios
         }
 
         [TestMethod]
-        public void CriarTresPedidosNoSistemaERetornarTres()
+        public async Task CriarTresPedidosNoSistemaERetornarTres()
         {
-            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Thamires", "thamires@email.com", "134652", "Rua augusta 200", TipoUsuario.NORMAL));
-            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Ana Paula", "ana@email.com", "134652", "Rua augusta 200", TipoUsuario.NORMAL));
+            await _repositorioU.NovoUsuarioAsync(new NovoUsuarioDTO("Thamires", "thamires@email.com", "134652", "Rua augusta 200", TipoUsuario.NORMAL));
+            await _repositorioU.NovoUsuarioAsync(new NovoUsuarioDTO("Ana Paula", "ana@email.com", "134652", "Rua augusta 200", TipoUsuario.NORMAL));
 
-            _repositorioP.NovoProduto(
+            await _repositorioP.NovoProdutoAsync(
                 new NovoProdutoDTO(
                     "Melancia",
                     9.55f,
@@ -49,7 +49,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                 )
             );
 
-            _repositorioP.NovoProduto(
+            await _repositorioP.NovoProdutoAsync(
                 new NovoProdutoDTO(
                     "Laranja",
                     1.78f,
@@ -60,7 +60,7 @@ namespace XepaCommerceTeste.Teste.repositorios
             );
 
 
-            _repositorioPe.NovoPedido(
+            await _repositorioPe.NovoPedidoAsync(
                 new NovoPedidoDTO(
                     6,
                     200.00f,
@@ -71,7 +71,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                 )
             );
 
-            _repositorioPe.NovoPedido(
+            await _repositorioPe.NovoPedidoAsync(
             new NovoPedidoDTO(
                     7,
                     100.00f,
@@ -82,16 +82,16 @@ namespace XepaCommerceTeste.Teste.repositorios
                 )
             );
 
-            Assert.AreEqual(2, _repositorioPe.PegarTodosPedidos().Count());
+            Assert.AreEqual(2, await _repositorioPe.PegarTodosPedidosAsync());
 
         }
 
         [TestMethod]
-        public void PegarPedidoPorPesquisaRetornarCustomizada()
+        public async Task PegarPedidoPorPesquisaRetornarCustomizada()
         {
 
-            _repositorioU.NovoUsuario(new NovoUsuarioDTO("Richard", "richard@email.com", "134652", "Rua Azul 200", TipoUsuario.NORMAL));
-            _repositorioP.NovoProduto(
+            await _repositorioU.NovoUsuarioAsync(new NovoUsuarioDTO("Richard", "richard@email.com", "134652", "Rua Azul 200", TipoUsuario.NORMAL));
+            await _repositorioP.NovoProdutoAsync(
                 new NovoProdutoDTO(
                     "Banana",
                     1.78f,
@@ -101,7 +101,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                 )
             );
 
-            _repositorioPe.NovoPedido(
+            await _repositorioPe.NovoPedidoAsync(
                 new NovoPedidoDTO(
                     5,
                     150.00f,
@@ -112,7 +112,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                 )
             );
 
-            _repositorioPe.NovoPedido(
+            await _repositorioPe.NovoPedidoAsync(
                 new NovoPedidoDTO(
                     5,
                     150.00f,
@@ -123,7 +123,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                 )
             );
 
-            _repositorioPe.NovoPedido(
+            await _repositorioPe.NovoPedidoAsync(
                 new NovoPedidoDTO(
                     5,
                     150.00f,
@@ -134,8 +134,8 @@ namespace XepaCommerceTeste.Teste.repositorios
                 )
             );
 
-            var pedidos = _repositorioPe
-            .PesquisarPedido("Banana", null, null);
+            var pedidos = await _repositorioPe
+            .PesquisarPedidoAsync("Banana", null, null);
             Assert.AreEqual(3, pedidos.Count());
         }
     }
