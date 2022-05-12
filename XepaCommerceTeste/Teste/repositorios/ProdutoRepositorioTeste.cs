@@ -19,7 +19,7 @@ namespace XepaCommerceTeste.Teste.repositorios
         private IProduto _repositorio;
 
         [TestInitialize]
-        public void ConfiguracaoInicial()
+        public async Task ConfiguracaoInicial()
         {
             var opt = new DbContextOptionsBuilder<XepaCommerceContexto>()
             .UseInMemoryDatabase(databaseName: "db_xepacommerce")
@@ -29,9 +29,9 @@ namespace XepaCommerceTeste.Teste.repositorios
         }
 
         [TestMethod]
-        public void CriarQuatroProdutosNoBancoRetornaQuatroProdutos()
+        public async Task CriarQuatroProdutosNoBancoRetornaQuatroProdutos()
         {
-            _repositorio.NovoProduto(
+          await _repositorio.NovoProdutoAsync(
                 new NovoProdutoDTO(
                     "Banana",
                     1.98f,
@@ -39,7 +39,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                     "Link da foto",
                     50 ));
 
-            _repositorio.NovoProduto(
+          await _repositorio.NovoProdutoAsync(
                 new NovoProdutoDTO(
                     "Maça",
                     5.98f,
@@ -47,7 +47,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                     "Link da foto",
                     200));
        
-            _repositorio.NovoProduto(
+           await _repositorio.NovoProdutoAsync(
               new NovoProdutoDTO(
                     "Pera",
                     3.30f,
@@ -55,7 +55,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                     "Link da foto",
                     100));
 
-            _repositorio.NovoProduto(
+           await  _repositorio.NovoProdutoAsync(
               new NovoProdutoDTO(
                     "Abacate",
                     7.98f,
@@ -68,10 +68,10 @@ namespace XepaCommerceTeste.Teste.repositorios
 
         [TestMethod]
         [DataRow(1)]
-        public void PegarProdutoPeloIdRetornaNome(int id)
+        public async Task PegarProdutoPeloIdRetornaNome(int id)
         {
             //GIVEN - Dado que pesquiso pelo id 1
-            var produto = _repositorio.PegarProdutoPeloId((id));
+            var produto = await _repositorio.PegarProdutoPeloIdAsync((id));
             //THEN - Entao deve retornar 1 tema)
             Assert.AreEqual("Banana", produto.NomeProduto);
         }
