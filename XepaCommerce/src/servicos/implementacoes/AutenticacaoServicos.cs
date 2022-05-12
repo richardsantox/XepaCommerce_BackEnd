@@ -4,6 +4,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.modelos;
 using XepaCommerce.src.repositorios;
@@ -36,12 +37,12 @@ namespace XepaCommerce.src.servicos.implementacoes
             return Convert.ToBase64String(bytes);
         }
 
-        public void CriarUsuarioSemDuplicar(NovoUsuarioDTO dto)
+        public async Task CriarUsuarioSemDuplicarAsync(NovoUsuarioDTO dto)
         {
-            var usuario = _repositorio.PegarUsuarioPeloEmail(dto.Email);
+            var usuario = await _repositorio.PegarUsuarioPeloEmailAsync(dto.Email);
             if (usuario != null) throw new Exception("Este email já está sendo utilizado");
             dto.Senha = CodificarSenha(dto.Senha);
-            _repositorio.NovoUsuario(dto);
+            await _repositorio.NovoUsuarioAsync(dto);
         }
 
         public string GerarToken(UsuarioModelo usuario)
@@ -66,15 +67,15 @@ namespace XepaCommerce.src.servicos.implementacoes
             return tokenManipulador.WriteToken(token);
         }
 
-        public AutorizacaoDTO PegarAutorizacao(AutenticarDTO autenticacao)
+        public async Task<AutorizacaoDTO> PegarAutorizacaoAsync(AutenticarDTO autenticacao)
         {
-            var usuario = _repositorio.PegarUsuarioPeloEmail(autenticacao.Email);
+            var usuario = await _repositorio.PegarUsuarioPeloEmailAsync(autenticacao.Email);
             if (usuario == null) throw new Exception("Usuário não encontrado");
             if (usuario.Senha != CodificarSenha(autenticacao.Senha)) throw new
             Exception("Senha incorreta");
             return new AutorizacaoDTO(usuario.Id, usuario.Email, usuario.Tipo, GerarToken(usuario));
-
+            
         }
+        #endregion
     }
-    #endregion
 }
