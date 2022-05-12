@@ -32,9 +32,9 @@ namespace XepaCommerceTeste.Teste.repositorios
 
 
         [TestMethod]
-        public void CriarQuatroUsuariosNoBancoRetornaQuatroUsuarios()
+        public async Task CriarQuatroUsuariosNoBancoRetornaQuatroUsuarios()
         {
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
                     "Richard",
                     "richard@email.com",
@@ -42,7 +42,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                     "Rua da flores, 55, SP",
                     TipoUsuario.NORMAL));
 
-            _repositorio.NovoUsuario(
+           await _repositorio.NovoUsuarioAsync(
                new NovoUsuarioDTO(
                    "Ana Paula",
                    "ana@email.com",
@@ -50,7 +50,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                    "Rua dos laranjais, 302, SP",
                    TipoUsuario.NORMAL));
 
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
                new NovoUsuarioDTO(
                    "Matheus Correira",
                    "matheus@email.com",
@@ -58,7 +58,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                    "Rua das americas, 963, SP",
                    TipoUsuario.NORMAL));
 
-            _repositorio.NovoUsuario(
+           await _repositorio.NovoUsuarioAsync(
                new NovoUsuarioDTO(
                    "Thamires Aparecida",
                    "thamires@email.com",
@@ -71,10 +71,10 @@ namespace XepaCommerceTeste.Teste.repositorios
 
 
         [TestMethod]
-        public void PegarUsuarioPeloEmailRetornaNaoNulo()
+        public async Task PegarUsuarioPeloEmailRetornaNaoNulo()
         {
             
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
                     "Souza",
                     "souza@email.com",
@@ -82,17 +82,17 @@ namespace XepaCommerceTeste.Teste.repositorios
                     "Rua França, 214, SP",
                     TipoUsuario.NORMAL));
 
-            var user = _repositorio.PegarUsuarioPeloEmail("souza@email.com");
+            var user = await _repositorio.PegarUsuarioPeloEmailAsync("souza@email.com");
 
             Assert.IsNotNull(user);
         }
 
 
         [TestMethod]
-        public void PegarUsuarioPeloIdRetornaNaoNuloENomeDoUsuario()
+        public async Task PegarUsuarioPeloIdRetornaNaoNuloENomeDoUsuario()
         {
  
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(
                     "Lucas Reluz",
                     "lucas@email.com",
@@ -100,7 +100,7 @@ namespace XepaCommerceTeste.Teste.repositorios
                     "Rua Alemanha, 214, SP",
                     TipoUsuario.NORMAL));
 
-            var user = _repositorio.PegarUsuarioPeloId(6);
+            var user = await _repositorio.PegarUsuarioPeloIdAsync(6);
 
             Assert.IsNotNull(user);
             Assert.AreEqual("Lucas Reluz", user.Nome);
@@ -108,9 +108,9 @@ namespace XepaCommerceTeste.Teste.repositorios
 
 
         [TestMethod]
-        public void AtualizarUsuarioRetornaUsuarioAtualizado()
+        public async Task AtualizarUsuarioRetornaUsuarioAtualizado()
         {
-            _repositorio.NovoUsuario(
+            await _repositorio.NovoUsuarioAsync(
             new NovoUsuarioDTO(
             "Ana Paula",
             "paula@email.com",
@@ -119,8 +119,8 @@ namespace XepaCommerceTeste.Teste.repositorios
             TipoUsuario.NORMAL));
 
             var antigo =
-            _repositorio.PegarUsuarioPeloEmail("estefania@email.com");
-            _repositorio.AtualizarUsuario(
+            await _repositorio.PegarUsuarioPeloEmailAsync("estefania@email.com");
+            await _repositorio.AtualizarUsuarioAsync(
             new AtualizarUsuarioDTO(
             7,
             "Ana Julia",
