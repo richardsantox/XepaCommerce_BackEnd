@@ -19,7 +19,7 @@ namespace XepaCommerceTeste.Teste.repositorios
         private IProduto _repositorio;
 
         [TestInitialize]
-        public async Task ConfiguracaoInicial()
+        public void ConfiguracaoInicial()
         {
             var opt = new DbContextOptionsBuilder<XepaCommerceContexto>()
             .UseInMemoryDatabase(databaseName: "db_xepacommerce")
