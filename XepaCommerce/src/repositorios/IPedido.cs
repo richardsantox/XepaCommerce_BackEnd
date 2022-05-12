@@ -11,6 +11,6 @@ namespace XepaCommerce.src.repositorios
         Task DeletarPedidoAsync(int id);
         Task<PedidoModelo> PegarPedidoPeloIdAsync(int id);
         Task <List<PedidoModelo>> PegarTodosPedidosAsync();
-        Task<List<PedidoModelo>> PesquisarPedidoAsync(string produto, string comprador, string email);
+        Task<List<PedidoModelo>> PesquisarPedidoAsync(string nomeProduto, string nomeComprador, string emailComprador);
     }
 }

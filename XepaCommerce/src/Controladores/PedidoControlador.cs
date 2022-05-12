@@ -53,13 +53,13 @@ namespace XepaCommerce.src.Controladores
         [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
         public async Task<ActionResult> PesquisarPedidoAsync
         (
-            [FromQuery] string produto,
-            [FromQuery] string comprador,
-            [FromQuery] string email
+            [FromQuery] string nomeProduto,
+            [FromQuery] string nomeComprador,
+            [FromQuery] string emailComprador
         )
 
         {
-              var pedido = await _repositorio.PesquisarPedidoAsync(produto, comprador, email);
+              var pedido = await _repositorio.PesquisarPedidoAsync(nomeProduto, nomeComprador, emailComprador);
 
               if (pedido.Count < 1) return NoContent();
 
@@ -79,7 +79,7 @@ namespace XepaCommerce.src.Controladores
         }
 
         [HttpDelete("deletar/{idPedido}")]
-        [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
+        [Authorize(Roles = "ADMINISTRADOR")]
         public async Task<ActionResult> DeletarPedidoAsync([FromRoute] int idPedido)
         {
             await _repositorio.DeletarPedidoAsync(idPedido);

@@ -63,11 +63,11 @@ namespace XepaCommerce.src.repositorios.implementacoes
         }
 
         public async Task<List<PedidoModelo>> PesquisarPedidoAsync(
-            string produto, 
-            string comprador,
-            string email)
+            string nomeProduto, 
+            string nomeComprador,
+            string emailComprador)
         {
-            switch (produto, comprador, email)
+            switch (nomeProduto, nomeComprador, emailComprador)
             {
                 case (null, null, null):
                     return await PegarTodosPedidosAsync();
@@ -76,21 +76,21 @@ namespace XepaCommerce.src.repositorios.implementacoes
                     return await _contexto.Pedidos
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
-                        .Where(pe => pe.Comprador.Email.Contains(comprador))
+                        .Where(pe => pe.Comprador.Email == emailComprador)
                         .ToListAsync();
 
                 case (null, _, null):
                     return await _contexto.Pedidos
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
-                        .Where(pe => pe.Comprador.Nome.Contains(comprador))
+                        .Where(pe => pe.Comprador.Nome.Contains(nomeComprador))
                          .ToListAsync();
 
                 case (_, null, null):
                     return await _contexto.Pedidos
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
-                        .Where(pe => pe.Produto.NomeProduto.Contains(produto))
+                        .Where(pe => pe.Produto.NomeProduto.Contains(nomeProduto))
                          .ToListAsync();
 
                 case (_, _, null):
@@ -98,8 +98,8 @@ namespace XepaCommerce.src.repositorios.implementacoes
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
                         .Where(pe =>
-                        pe.Produto.NomeProduto.Contains(produto) &
-                        pe.Comprador.Nome.Contains(comprador))
+                        pe.Produto.NomeProduto.Contains(nomeProduto) &
+                        pe.Comprador.Nome.Contains(nomeComprador))
                          .ToListAsync();
 
                 case (null, _, _):
@@ -107,8 +107,8 @@ namespace XepaCommerce.src.repositorios.implementacoes
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
                         .Where(pe =>
-                        pe.Comprador.Nome.Contains(comprador) &
-                        pe.Comprador.Email.Contains(email))
+                        pe.Comprador.Nome.Contains(nomeComprador) &
+                        pe.Comprador.Email == emailComprador)
                        .ToListAsync();
 
                 case (_, null, _):
@@ -116,8 +116,8 @@ namespace XepaCommerce.src.repositorios.implementacoes
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
                         .Where(pe =>
-                        pe.Produto.NomeProduto.Contains(produto) &
-                        pe.Comprador.Email.Contains(email))
+                        pe.Produto.NomeProduto.Contains(nomeProduto) &
+                        pe.Comprador.Email == emailComprador)
                         .ToListAsync();
 
                 case (_, _, _):
@@ -125,9 +125,9 @@ namespace XepaCommerce.src.repositorios.implementacoes
                         .Include(pe => pe.Produto)
                         .Include(pe => pe.Comprador)
                         .Where(pe =>
-                        pe.Produto.NomeProduto.Contains(produto) |
-                        pe.Comprador.Nome.Contains(comprador) |
-                        pe.Comprador.Email.Contains(email))
+                        pe.Produto.NomeProduto.Contains(nomeProduto) |
+                        pe.Comprador.Nome.Contains(nomeComprador) |
+                        pe.Comprador.Email == emailComprador)
                         .ToListAsync();
             }
 

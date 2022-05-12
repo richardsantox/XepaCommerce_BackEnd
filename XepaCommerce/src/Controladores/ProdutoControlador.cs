@@ -29,7 +29,7 @@ namespace XepaCommerce.src.Controladores
         #region Métodos
 
         [HttpGet("id/{idproduto}")]
-        [Authorize(Roles = "ADMINISTRADOR")]
+        [AllowAnonymous]
         public async Task<ActionResult> PegarProdutoPeloIdAsync([FromRoute] int idproduto) 
         {
             var Produto = await _repositorio.PegarProdutoPeloIdAsync(idproduto);
