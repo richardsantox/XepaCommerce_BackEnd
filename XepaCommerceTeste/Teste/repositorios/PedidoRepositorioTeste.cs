@@ -82,7 +82,9 @@ namespace XepaCommerceTeste.Teste.repositorios
                 )
             );
 
-            Assert.AreEqual(2, await _repositorioPe.PegarTodosPedidosAsync());
+            var list = await _repositorioPe.PegarTodosPedidosAsync();
+
+            Assert.AreEqual(2, list.Count);
 
         }
 
