@@ -14,9 +14,9 @@ using XepaCommerce.src.servicos;
 using XepaCommerce.src.servicos.implementacoes;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using XepaCommerce.src.data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace XepaCommerce
 {
