@@ -3,6 +3,12 @@ using XepaCommerce.src.utilidades;
 
 namespace XepaCommerce.src.dtos
 {
+    /// <summary>
+    /// <para>Resumo: Classe espelho responsável pela Criação de Novos Usuários</para>
+    /// <para>Criado por: Matheus Correia</para>
+    /// <para>Version: 1.0</para>
+    /// <para>Data: 12/05/2022</para>
+    /// </summary>
     public class NovoUsuarioDTO
     {
         [Required , StringLength(100)]
@@ -29,7 +35,13 @@ namespace XepaCommerce.src.dtos
             Tipo = tipo;
         }
     }
-
+    
+    /// <summary>
+    /// <para>Resumo: Classe espelho responsável pela Atualização de Usuários</para>
+    /// <para>Criado por: Matheus Correia</para>
+    /// <para>Version: 1.0</para>
+    /// <para>Data: 12/05/2022</para>
+    /// </summary>
     public class AtualizarUsuarioDTO
     {
         [Required]

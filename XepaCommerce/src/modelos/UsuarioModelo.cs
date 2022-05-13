@@ -6,6 +6,12 @@ using XepaCommerce.src.utilidades;
 
 namespace XepaCommerce.src.modelos
 {
+    /// <summary>
+    /// <para>Resumo: Classe espelho responsável por Usuários no servidor</para>
+    /// <para>Criado por: Matheus Correia</para>
+    /// <para>Version: 1.0</para>
+    /// <para>Data: 12/05/2022</para>
+    /// </summary>
     [Table("tb_usuarios")]
     public class UsuarioModelo
     {
