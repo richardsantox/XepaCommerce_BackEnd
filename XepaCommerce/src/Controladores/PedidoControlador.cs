@@ -29,7 +29,6 @@ namespace XepaCommerce.src.Controladores
 
         #region Metodos 
         
-        ///<para>Criado por: Lucas Reluz</para>
         /// <summary>
         /// Pegar pedido pelo Id
         /// </summary>
@@ -50,7 +49,6 @@ namespace XepaCommerce.src.Controladores
             return Ok(pedido);
         }
 
-        ///<para>Criado por: Lucas Reluz</para>
         /// <summary>
         /// Pega todos os pedidos
         /// </summary>
@@ -72,7 +70,6 @@ namespace XepaCommerce.src.Controladores
 
         /// <summary>
         /// Pegar pedidos por pesquisa
-        /// <para>Criado por: Lucas Reluz</para>
         /// </summary>
         /// <param name="nomeProduto">string</param>
         /// <param name="nomeComprador">string</param>
@@ -103,7 +100,6 @@ namespace XepaCommerce.src.Controladores
 
         /// <summary>
         /// Novo pedido
-        /// <para>Criado por: Lucas Reluz</para>
         /// </summary>
         /// <param name="pedido">NovoPedidoDTO</param>
         /// <returns>ActionResult</returns>
@@ -138,7 +134,6 @@ namespace XepaCommerce.src.Controladores
 
         /// <summary>
         /// Deleta um pedido
-        /// <para>Criado por: Lucas Reluz</para>
         /// </summary>
         /// <param name="idPedido">int</param>
         /// <returns>ActionResult</returns>

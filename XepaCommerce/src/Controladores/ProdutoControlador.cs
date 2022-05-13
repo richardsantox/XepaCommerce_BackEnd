@@ -51,7 +51,7 @@ namespace XepaCommerce.src.Controladores
         /// <returns>ActionResult</returns>
         /// <response code="200">Retorna o produto</response>
         /// <response code="204">Produto não existe</response>
-        [HttpGet]
+        [HttpGet("nome")]
         [AllowAnonymous]
         public async Task<ActionResult> PegarProdutosPorNomeAsync([FromQuery] string nomeProduto) 
         {
@@ -69,9 +69,9 @@ namespace XepaCommerce.src.Controladores
         /// <response code="404">Produto não encontrado</response>
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult PegarTodosProdutos()
+        public async Task<ActionResult> PegarTodosProdutosAsync()
         {
-            var lista = _repositorio.PegarTodosProdutos();
+            var lista = await _repositorio.PegarTodosProdutosAsync();
 
             if (lista.Count < 1) return NotFound();
             return Ok(lista);
