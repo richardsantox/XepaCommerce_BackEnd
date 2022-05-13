@@ -8,6 +8,12 @@ using XepaCommerce.src.modelos;
 
 namespace XepaCommerce.src.repositorios.implementacoes
 {
+    /// <summary>
+    /// <para>Resumo: Classe responsável por implementar IUsuario</para>
+    /// <para>Criado por: Gustavo Boaz</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 12/05/2022</para>
+    /// </summary>
     public class PedidoRepositorio : IPedido
     {
         #region Atributos
@@ -25,12 +31,20 @@ namespace XepaCommerce.src.repositorios.implementacoes
 
         #region Metodos
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para deletar um pedido</para>
+        /// </summary>
+        /// <param name="id">Id do pedido</param>
         public async Task DeletarPedidoAsync(int id)
         {
             _contexto.Pedidos.Remove(await PegarPedidoPeloIdAsync(id));
             await _contexto.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para salvar um pedido</para>
+        /// </summary>
+        /// <param name="pedido">NovoPedidoDTO</param>
         public async Task NovoPedidoAsync(NovoPedidoDTO pedido)
         {
             await _contexto.Pedidos.AddAsync(new PedidoModelo
@@ -46,6 +60,11 @@ namespace XepaCommerce.src.repositorios.implementacoes
 
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar um pedido pelo Id</para>
+        /// </summary>
+        /// <param name="id">Id do pedido</param>
+        /// <return>PedidoModelo</return>
         public async Task<PedidoModelo> PegarPedidoPeloIdAsync(int id)
         {
             return await _contexto.Pedidos
@@ -54,6 +73,10 @@ namespace XepaCommerce.src.repositorios.implementacoes
                  .FirstOrDefaultAsync(p => p.Id == id);
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar todos os produtos</para>
+        /// </summary>
+        /// <return>Lista PedidoModelo</return>
         public async Task<List<PedidoModelo>> PegarTodosPedidosAsync()
         {
             return await _contexto.Pedidos
@@ -62,6 +85,13 @@ namespace XepaCommerce.src.repositorios.implementacoes
                .ToListAsync();
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para Pesquisar pedido</para>
+        /// </summary>
+        /// <param name="nomeProduto">Nome do produto</param>
+        /// <param name="nomeComprador">Nome do Comprador</param>
+        /// <param name="emailComprador">Email do comprador</param>
+        /// <return>Lista PedidoModelo</return>
         public async Task<List<PedidoModelo>> PesquisarPedidoAsync(
             string nomeProduto, 
             string nomeComprador,
@@ -130,8 +160,6 @@ namespace XepaCommerce.src.repositorios.implementacoes
                         pe.Comprador.Email == emailComprador)
                         .ToListAsync();
             }
-
-
         }
         #endregion Metodos
     }
