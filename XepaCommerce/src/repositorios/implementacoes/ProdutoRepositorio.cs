@@ -97,9 +97,9 @@ namespace XepaCommerce.src.repositorios.implementacoes
         /// <para>Resumo: Método assíncrono para pegar todos produtos</para>
         /// </summary>
         /// <return>Lista ProdutoModelo</return>
-        public List<ProdutoModelo> PegarTodosProdutos()
+        public async Task<List<ProdutoModelo>> PegarTodosProdutosAsync()
         {
-            return _contexto.Produtos.ToList();
+            return await _contexto.Produtos.ToListAsync();
         }
         #endregion Metodos
     }
