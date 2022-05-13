@@ -94,7 +94,7 @@ namespace XepaCommerce.src.servicos.implementacoes
         /// <summary>
         /// <para>Resumo: Método assíncrono responsavel devolver autorização para usuario autenticado</para>
         /// </summary>
-        /// <param name="dto">AutenticarDTO</param>
+        /// <param name="autenticacao">AutenticarDTO</param>
         /// <returns>AutorizacaoDTO</returns>
         /// <exception cref="Exception">Usuário não encontrado</exception>
         /// <exception cref="Exception">Senha incorreta</exception>

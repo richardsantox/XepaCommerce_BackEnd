@@ -2,14 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-<<<<<<< HEAD
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	<NoWarn>$(NoWarn);1591</NoWarn>
-=======
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
-
->>>>>>> 32399de2d52a16f1dd162cc7664704dde74ab3d1
   </PropertyGroup>
 
   <ItemGroup>

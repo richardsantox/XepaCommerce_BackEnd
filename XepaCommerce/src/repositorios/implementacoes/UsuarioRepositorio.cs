@@ -6,14 +6,14 @@ using XepaCommerce.src.data;
 using XepaCommerce.src.dtos;
 using XepaCommerce.src.modelos;
 
-/// <summary>
-/// <para>Resumo: Implementacao dos metodos na interface IUsuario </para>
-/// <para>Criado por: Lucas Reluz</para>
-/// <para>Versão: 1.0</para>
-/// <para>Data: 05/05/2022</para>
-/// </summary>
 namespace XepaCommerce.src.repositorios.implementacoes
 {
+    /// <summary>
+    /// <para>Resumo: Implementacao dos metodos na interface IUsuario </para>
+    /// <para>Criado por: Lucas Reluz</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 05/05/2022</para>
+    /// </summary>
     public class UsuarioRepositorio : IUsuario
     {
         #region Atributos
