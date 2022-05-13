@@ -17,7 +17,7 @@ namespace XepaCommerce.src.repositorios
         Task AtualizarProdutoAsync(AtualizarProdutoDTO produto);
         Task DeletarProdutoAsync(int id);
         Task<ProdutoModelo> PegarProdutoPeloIdAsync(int id);
-        List<ProdutoModelo> PegarTodosProdutos();
+        Task<List<ProdutoModelo>> PegarTodosProdutosAsync();
         Task<List<ProdutoModelo>> PegarProdutosPorNomeAsync(string nomeProduto);       
     }
 }
