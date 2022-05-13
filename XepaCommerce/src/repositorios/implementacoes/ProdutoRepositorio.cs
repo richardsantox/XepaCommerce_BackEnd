@@ -8,6 +8,12 @@ using XepaCommerce.src.modelos;
 
 namespace XepaCommerce.src.repositorios.implementacoes
 {
+    /// <summary>
+    /// <para>Resumo: Classe responsavel por implementar IProduto</para>
+    /// <para>Criado por: Matheus Correia</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 05/05/2022</para>
+    /// </summary>
     public class ProdutoRepositorio : IProduto
     {
         #region Atributos
@@ -24,6 +30,10 @@ namespace XepaCommerce.src.repositorios.implementacoes
         #endregion
 
         #region Metodos
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para atualizar um produto</para>
+        /// </summary>
+        /// <param name="produto">AtualizarProdutoDTO</param>
         public async Task AtualizarProdutoAsync(AtualizarProdutoDTO produto)
         {
             var _produto = await PegarProdutoPeloIdAsync(produto.Id);
@@ -35,13 +45,21 @@ namespace XepaCommerce.src.repositorios.implementacoes
             _contexto.Update(_produto);
             await _contexto.SaveChangesAsync();
         }
-
+        
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para deletar um produto</para>
+        /// </summary>
+        /// <param name="id">Id do produto</param>
         public async Task DeletarProdutoAsync(int id)
         {
             _contexto.Produtos.Remove(await PegarProdutoPeloIdAsync(id));
             await _contexto.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para salvar um novo produto</para>
+        /// </summary>
+        /// <param name="produto">NovoProdutoDTO</param>        
         public async Task NovoProdutoAsync(NovoProdutoDTO produto)
         {
             _contexto.Produtos.Add(new ProdutoModelo
@@ -54,17 +72,31 @@ namespace XepaCommerce.src.repositorios.implementacoes
         });
             await _contexto.SaveChangesAsync();
         }
-
+        
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar um produto pelo Id</para>
+        /// </summary>
+        /// <param name="id">Id do produto</param>
+        /// <return>ProdutoModelo</return>
         public async Task<ProdutoModelo> PegarProdutoPeloIdAsync(int id)
         {
             return await _contexto.Produtos.FirstOrDefaultAsync(p => p.Id == id);
         }
-
+        
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar produto pelo nome</para>
+        /// </summary>
+        /// <param name="nomeProduto">Nome do produto</param>
+        /// <return>Lista ProdutoModelo</return>
         public async Task<List<ProdutoModelo>> PegarProdutosPorNomeAsync(string nomeProduto)
         {
             return await _contexto.Produtos.Where(u => u.NomeProduto.Contains(nomeProduto)).ToListAsync();
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar todos produtos</para>
+        /// </summary>
+        /// <return>Lista ProdutoModelo</return>
         public List<ProdutoModelo> PegarTodosProdutos()
         {
             return _contexto.Produtos.ToList();
