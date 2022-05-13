@@ -5,6 +5,12 @@ using XepaCommerce.src.modelos;
 
 namespace XepaCommerce.src.repositorios
 {
+    /// <summary>
+    /// <para>Resumo: Responsavel por representar ações de CRUD de produto</para>
+    /// <para>Criado por: Thamires Freitas | Grupo 04</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 13/05/2022</para>
+    /// </summary>
     public interface IProduto
     {
         Task NovoProdutoAsync(NovoProdutoDTO produto);
