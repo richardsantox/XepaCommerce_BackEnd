@@ -16,15 +16,11 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using XepaCommerce.src.data;
 using Microsoft.EntityFrameworkCore;
-<<<<<<< HEAD
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
-=======
-using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
+using Microsoft.OpenApi.Models;
 
->>>>>>> 9e99cbade8f543a2797ce567c7e4b4803e00a0e9
 namespace XepaCommerce
 {
     public class Startup
