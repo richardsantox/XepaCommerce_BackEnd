@@ -35,7 +35,7 @@ namespace XepaCommerce.src.dtos
             Tipo = tipo;
         }
     }
-    
+
     /// <summary>
     /// <para>Resumo: Classe espelho responsável pela Atualização de Usuários</para>
     /// <para>Criado por: Matheus Correia</para>
@@ -55,7 +55,7 @@ namespace XepaCommerce.src.dtos
 
         [Required]
         public string Endereco { get; set; }
-
+        
         public AtualizarUsuarioDTO(int id, string nome , string senha , string endereco )
         {
             Id = id;

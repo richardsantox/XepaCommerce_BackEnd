@@ -166,7 +166,7 @@ namespace XepaCommerce.src.Controladores
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
-        [Authorize(Roles = "NORMAL,ADMINISTRADOR")]
+        [Authorize(Roles = "NORMAL")]
         public async Task<ActionResult> AtualizarUsuarioAsync([FromBody] AtualizarUsuarioDTO usuario)
         {
             if (!ModelState.IsValid) return BadRequest();

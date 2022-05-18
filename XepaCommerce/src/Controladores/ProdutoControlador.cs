@@ -34,7 +34,7 @@ namespace XepaCommerce.src.Controladores
         /// <returns>ActionResult</returns>
         /// <response code="200">Retorna o produto</response>
         /// <response code="404">Produto não existente</response>
-        [HttpGet("id/{idproduto}")]
+        [HttpGet("id/{idProduto}")]
         [AllowAnonymous]
         public async Task<ActionResult> PegarProdutoPeloIdAsync([FromRoute] int idProduto) 
         {
@@ -83,7 +83,7 @@ namespace XepaCommerce.src.Controladores
         /// <param name="idProduto">int</param>
         /// <returns>ActionResult</returns>
         /// <response code="204">Produto deletado</response>
-        [HttpDelete("deletar/{idproduto}")]
+        [HttpDelete("deletar/{idProduto}")]
         [Authorize(Roles = "ADMINISTRADOR")]
         public async Task<ActionResult> DeletarProdutoAsync([FromRoute] int idProduto)
         {
