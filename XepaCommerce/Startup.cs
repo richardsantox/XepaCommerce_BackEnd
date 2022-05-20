@@ -36,9 +36,20 @@ namespace XepaCommerce
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            #region Configuracao DB
-            services.AddDbContext<XepaCommerceContexto>(opt => opt.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
-            #endregion
+            // Configuraçãp Banco de Dados
+            if (Configuration["Enviroment:Start"] == "PROD")
+            {
+                services.AddEntityFrameworkNpgsql()
+                .AddDbContext<XepaCommerceContexto>(
+                opt =>
+                opt.UseNpgsql(Configuration["ConnectionStringsProd:DefaultConnection"]));
+            }
+            else
+            {
+                services.AddDbContext<XepaCommerceContexto>(
+                opt => 
+                opt.UseSqlServer(Configuration["ConnectionStringsDev:DefaultConnection"]));
+            }
 
             //Repositorio
             services.AddScoped<IUsuario, UsuarioRepositorio>();
@@ -116,8 +127,20 @@ namespace XepaCommerce
                 contexto.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "XepaCommerce v1"));
+                app.UseSwaggerUI(c => {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "XepaCommerce v1");
+                    c.RoutePrefix = string.Empty;
+                });
             }
+
+            // Ambiente de produção
+            contexto.Database.EnsureCreated();
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "XepaCommerce v1");
+                c.RoutePrefix = string.Empty;
+            });
 
             //ambiente de Produ��o Rotas
             app.UseRouting();
