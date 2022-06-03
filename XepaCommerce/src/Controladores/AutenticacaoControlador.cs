@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -30,13 +31,26 @@ namespace XepaCommerce.src.Controladores
 
         #region Métodos
         /// <summary>
-        /// Autenticação
+        /// Pegar autorização
         /// </summary>
         /// <param name="autenticacao">string</param>
         /// <returns>ActionResult</returns>
+        /// <remarks>
+        /// Exemplo de requisição:
+        ///
+        ///     POST /api/Autenticacao
+        ///     {
+        ///        "email": "AnaPaula@gmail.com",
+        ///        "senha": "35626"
+        ///     }
+        ///
+        /// </remarks>
         /// <response code="400">Retorna erro na requisição</response>
         /// <response code="200">Retorna autorizado</response>
         /// <response code="401">Retorna não autorizado</response>
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AutorizacaoDTO))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> Autenticar([FromBody] AutenticarDTO autenticacao)

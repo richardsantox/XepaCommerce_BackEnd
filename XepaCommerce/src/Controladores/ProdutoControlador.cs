@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using XepaCommerce.src.dtos;
+using XepaCommerce.src.modelos;
 using XepaCommerce.src.repositorios;
 
 namespace XepaCommerce.src.Controladores
@@ -34,6 +36,8 @@ namespace XepaCommerce.src.Controladores
         /// <returns>ActionResult</returns>
         /// <response code="200">Retorna o produto</response>
         /// <response code="404">Produto não existente</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProdutoModelo))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("id/{idProduto}")]
         [AllowAnonymous]
         public async Task<ActionResult> PegarProdutoPeloIdAsync([FromRoute] int idProduto) 
@@ -51,6 +55,8 @@ namespace XepaCommerce.src.Controladores
         /// <returns>ActionResult</returns>
         /// <response code="200">Retorna o produto</response>
         /// <response code="204">Produto não existe</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProdutoModelo))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet("nome")]
         [AllowAnonymous]
         public async Task<ActionResult> PegarProdutosPorNomeAsync([FromQuery] string nomeProduto) 
@@ -67,6 +73,8 @@ namespace XepaCommerce.src.Controladores
         /// <returns>ActionResult</returns>
         /// <response code="200">Retornar todas as postagens</response>
         /// <response code="404">Produto não encontrado</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> PegarTodosProdutosAsync()
@@ -83,6 +91,7 @@ namespace XepaCommerce.src.Controladores
         /// <param name="idProduto">int</param>
         /// <returns>ActionResult</returns>
         /// <response code="204">Produto deletado</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpDelete("deletar/{idProduto}")]
         [Authorize(Roles = "ADMINISTRADOR")]
         public async Task<ActionResult> DeletarProdutoAsync([FromRoute] int idProduto)
@@ -111,6 +120,8 @@ namespace XepaCommerce.src.Controladores
         /// </remarks>
         /// <response code="201">Retorna produto criado</response>
         /// <response code="400">Erro na requisição</response>
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ProdutoModelo))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         [Authorize(Roles = "ADMINISTRADOR")]
         public async Task<ActionResult> NovoProdutoAsync([FromBody] NovoProdutoDTO produto)
@@ -142,6 +153,8 @@ namespace XepaCommerce.src.Controladores
         /// </remarks>
         /// <response code="200">Retorna produto atualizado</response>
         /// <response code="400">Erro na requisição</response>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProdutoModelo))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
         [Authorize(Roles = "ADMINISTRADOR")]
         public async Task<ActionResult> AtualizarProdutoAsync([FromBody] AtualizarProdutoDTO produto)
