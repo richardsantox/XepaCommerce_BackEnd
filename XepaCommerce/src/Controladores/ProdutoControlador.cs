@@ -112,9 +112,9 @@ namespace XepaCommerce.src.Controladores
         ///     {
         ///        "nomeProduto": "Banana",
         ///        "preco": 5.00f,
-        ///        "produtoDescricao": "Banana da terra",
-        ///        "produtoFoto": "URLPHOTO",
-        ///        "produtoEstoque": 20
+        ///        "descricao": "Banana da terra",
+        ///        "foto": "URLPHOTO",
+        ///        "estoque": 20
         ///     }
         ///
         /// </remarks>
@@ -145,9 +145,9 @@ namespace XepaCommerce.src.Controladores
         ///     {
         ///        "nomeProduto": "Banana",
         ///        "preco": 5.00f,
-        ///        "produtoDescricao": "Banana da terra",
-        ///        "produtoFoto": "URLPHOTO",
-        ///        "produtoEstoque": 20           
+        ///        "descricao": "Banana da terra",
+        ///        "foto": "URLPHOTO",
+        ///        "estoque": 20           
         ///      }
         ///
         /// </remarks>

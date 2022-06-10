@@ -109,11 +109,11 @@ namespace XepaCommerce.src.Controladores
         ///     PUT /api/Pedido
         ///     {
         ///       "quantidade" : "1",
-        ///       "precototal" : 5.60,
-        ///       "statuspedido" : "Entregue",
-        ///       "formadepagamento" : "Cartão de Credito"
-        ///       "nomecomprador" : "Dom Pedro II"
-        ///       "produtocomprado" : "Abobora"
+        ///       "precoTotal" : 5.60,
+        ///       "statusPedido" : "Entregue",
+        ///       "formaDePagamento" : "Cartão de Credito"
+        ///       "nomeComprador" : "Dom Pedro II"
+        ///       "produtoComprado" : "Abobora"
         ///     }
         ///
         /// </remarks>
